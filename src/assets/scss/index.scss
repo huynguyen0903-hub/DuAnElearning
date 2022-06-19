@@ -1,0 +1,15 @@
+@import "./_components/NavHeader";
+@import "./_components/Menu";
+@import "./_components/NavContent";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

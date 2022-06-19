@@ -1,0 +1,80 @@
+.NavContent__wrapper {
+  margin-bottom: 15px;
+  .group__colection {
+    width: 95%;
+    margin: auto;
+    background-color: #ffffff;
+    .colection__button {
+      position: relative;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      padding: $padding-10;
+      min-width: 130px;
+      background-color: #ffffff;
+      &::after {
+        content: "";
+        height: 5px;
+        width: 0%;
+        background-color: #c79e65;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+      }
+      &.active {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.course__grid {
+  .swiper-button-prev,
+  .swiper-button-next {
+    background-color: #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    &::after {
+      font-size: 200%;
+    }
+  }
+
+  .swiper-wrapper {
+    .swiper-slide {
+      min-height: 300px;
+      min-width: 150px;
+      cursor: pointer;
+      .slideImage {
+        img {
+          border-radius: $border-radius $border-radius 0px 0px;
+          height: 150px;
+        }
+      }
+      .slideContent {
+        position: absolute;
+        top: 50%;
+        color: #000000;
+        background-color: $white-color;
+        width: 100%;
+        height: 50%;
+        border-radius: 0 0 $border-radius $border-radius;
+        .wrapper__inner {
+          .course__type {
+          }
+          .course__name {
+          }
+          .course__description {
+          }
+          .course__author {
+          }
+          .course__price {
+          }
+        }
+      }
+    }
+  }
+}

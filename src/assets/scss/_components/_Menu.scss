@@ -1,0 +1,65 @@
+@import "../_themes/theme.scss";
+.modal__popup {
+  display: none;
+  border: 1px solid #d6d6d6;
+  position: fixed;
+  top: 75px;
+  left: 250px;
+  color: #000000;
+  background-color: #ffffff;
+  border-bottom: none;
+  border-top: none;
+  .modal__popup__group {
+    &:hover {
+      .group__content {
+        display: block !important;
+      }
+    }
+  }
+  .group__lable {
+    padding: $padding-10;
+    width: 200px;
+    &:hover {
+      background-color: #c3c3c3;
+    }
+    @include flex(center, space-between, row);
+    .course__name {
+      text-decoration: none;
+      color: #000000;
+    }
+  }
+  .group__content {
+    background-color: #ffffff;
+    display: none;
+    border: 1px solid #d6d6d6;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    padding: $padding-10;
+    border-top: none;
+    .content__table {
+      width: 500px;
+      text-align: left;
+      .table__title {
+        h1 {
+          color: #102053;
+          font-weight: 500;
+        }
+      }
+
+      .table__subtitle {
+        width: 100%;
+        h3 {
+          color: #ffcb87;
+        }
+      }
+    }
+  }
+  z-index: 2;
+}
+.menu {
+  @include flex(center, unset, row);
+  & * ~ * {
+    margin-left: 10px;
+  }
+}
