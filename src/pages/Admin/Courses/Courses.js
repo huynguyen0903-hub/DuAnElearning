@@ -3,7 +3,7 @@ import { Button, Table } from "antd";
 import { AudioOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Input, Space } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { layDanhSachKhoaHocAction } from "../../../redux/actions/QuanLyKhoaHocAction";
+import { layDanhSachKhoaHocAction, xoaKhoaHocAction } from "../../../redux/actions/QuanLyKhoaHocAction";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 const { Search } = Input;
@@ -90,13 +90,19 @@ export default function Courses(props) {
     },
     {
       title: "Hành động",
-      dataIndex: "hanhDong",
+      dataIndex: "maKhoaHoc",
     
       render: (text, course) => {
         return (
           <Fragment>
         <NavLink key={1} className="mr-2" to={`/admin/courses/edit/${course.maKhoaHoc}`}><EditOutlined style={{color:'blue'}}/></NavLink>
-        <NavLink key={2} to="/"><DeleteOutlined style={{color:'red'}}/></NavLink>  
+        <span style={{cursor:'pointer'}} key={2} onClick={()=> {
+          //Gọi action xóa
+          if(window.confirm('Bạn có chắc muốn xóa ' + course.tenKhoaHoc)){
+            //Gọi action
+            dispatch(xoaKhoaHocAction(course.maKhoaHoc))
+          }
+        }} ><DeleteOutlined style={{color:'red'}}/></span>  
           </Fragment>
         );
       },
@@ -116,14 +122,19 @@ export default function Courses(props) {
     />
   );
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    console.log(value);
+  
+     //Gọi api layDanhSachKhoaHoc
+     dispatch(layDanhSachKhoaHocAction(value));
+  }
 
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
 
   return (
-    <div>
+    <div >
       <h2 className="text 4-xl text-center">Quản lý khóa học</h2>
       <Button
         className="mb-3"
@@ -133,8 +144,8 @@ export default function Courses(props) {
       >
         Thêm khóa học
       </Button>
-      <Search placeholder=" Tìm kiếm" size="large" onSearch={onSearch} />
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Search placeholder=" Tìm kiếm" size="large" onSearch={onSearch} /> 
+      <Table columns={columns} dataSource={data} onChange={onChange} rowKey={"maKhoaHoc"} />
     </div>
   );
 }

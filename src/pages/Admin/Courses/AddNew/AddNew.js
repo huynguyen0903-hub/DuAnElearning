@@ -23,19 +23,17 @@ const AddNew = () => {
   const formik = useFormik({
     initialValues: {
       maKhoaHoc: "",
-      biDanh: "",
       tenKhoaHoc: "",
       moTa: "",
-      luotXem: "",
+      luotXem: 0,
+      danhGia: 0,
+      hinhAnh: "",
       maNhom: "",
       ngayTao: "",
-      soLuongHocVien: "",
-      maDanhMucKhoaHoc: "",
-      tenDanhMucKhoaHoc: "",
-      hinhAnh: {},
+      maDanhMucKhoahoc: "",
+      taiKhoanNguoiTao:"",
     },
     onSubmit: (values) => {
-      console.log("values", values);
      
       
       //Tạo đối tượng formdata
@@ -46,8 +44,9 @@ const AddNew = () => {
           formData.append(key, values[key]);
         } 
       }
-      console.log(formData)
 
+      formData.append('File', values['hinhAnh']);
+      console.log(values);
       //Gọi api gửi các gia trị formdata về backend xử lý
       dispatch(themKhoaHocUploadHinhAction(formData));
     }
@@ -120,13 +119,7 @@ const AddNew = () => {
           onChange={formik.handleChange}
         />
       </Form.Item>
-      <Form.Item label="Bí danh">
-        <Input
-          style={{ width: 360 }}
-          name="biDanh"
-          onChange={formik.handleChange}
-        />
-      </Form.Item>
+     
       <Form.Item label="Tên khóa học">
         <Input
           style={{ width: 360 }}
@@ -150,20 +143,22 @@ const AddNew = () => {
       <Form.Item label="Ngày tạo">
         <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} />
       </Form.Item>
-      <Form.Item label="Số lượng học viên">
-        <InputNumber onChange={handleChangeInputNumber("soLuongHocVien")} />
-      </Form.Item>
+      
       <Form.Item label="Mã danh mục khóa học">
         <Input
           style={{ width: 360 }}
-          name="maDanhMucKhoaHoc"
+          name="maDanhMucKhoahoc"
           onChange={formik.handleChange}
         />
       </Form.Item>
-
-      <Form.Item label="Tên danh mục khóa học">
-        <Input style={{ width: 360 }} name="tenDanhMucKhoaHoc" onChange={formik.handleChange} />
+      <Form.Item label="Tài khoản người tạo">
+        <Input
+          style={{ width: 360 }}
+          name="taiKhoanNguoiTao"
+          onChange={formik.handleChange}
+        />
       </Form.Item>
+      
       <Form.Item label="Hình ảnh">
         <input
           type="file"
@@ -174,8 +169,8 @@ const AddNew = () => {
         <img style={{ width: 150, height: 150 }} src={imgSrc} alt="..." />
       </Form.Item>
       <Form.Item label="Tác vụ">
-        <button type="submit" className="bg-blue-300 text-white p-2">
-          Thêm khóa học
+        <button type="submit" className=" p-2">
+          Thêm mới
         </button>
       </Form.Item>
     </Form>
